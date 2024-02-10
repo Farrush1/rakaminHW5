@@ -34,19 +34,23 @@ class Registrant {
   
   document.getElementById('form-container').innerHTML = `
     <form id="registration-form">
-      <div class="mb-3">
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <div class="form floating mb-3">
         <label for="name" class="form-label">Name</label>
         <input type="text" class="form-control" id="name" required minlength="10">
       </div>
+
       <div class="mb-3">
         <label for="age" class="form-label">Age</label>
         <input type="number" class="form-control" id="age" required min="25">
       </div>
+
       <div class="mb-3">
         <label for="allowance" class="form-label">Allowance </label>
         <input type="number" class="form-control" id="allowance" required min="100000" max="1000000">
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      
+      <button type="submit" class="btn btn-primary">Submit</button></div>
     </form>
   `;
   
@@ -58,12 +62,8 @@ class Registrant {
     const age = parseInt(document.getElementById('age').value);
     const allowance = parseInt(document.getElementById('allowance').value);
   
-    if (name.length < 10 ){
-        alert('Name must 10');
-        return;
-    }
-    if (age < 25 || allowance < 100000 || allowance > 1000000) {
-      alert('Mohon periksa kembali input Anda!');
+    if (name.length < 10 || age < 25 || allowance < 100000 || allowance > 1000000) {
+      alert('Please double check your input');
       return;
     }
   
@@ -78,7 +78,7 @@ class Registrant {
     const { averageAge, averageAllowance } = registrationManager.calculateAverage();
   
     let tableHtml = `
-      <table class="table table-striped">
+      <table class="table table-dark table-hover">
         <thead>
           <tr>
             <th scope="col">Name</th>
@@ -102,7 +102,7 @@ class Registrant {
     tableHtml += `
         </tbody>
       </table>
-      <p>Rata-rata pendaftar memiliki uang sangu sebesar ${averageAllowance.toFixed(2)} dengan rata-rata umur ${averageAge.toFixed(2)}</p>
+      <p>The average registrant has a financial allowance of Rp${averageAllowance.toFixed(2)} with average age ${averageAge.toFixed(2)} year old</p>
     `;
   
     document.getElementById('table-container').innerHTML = tableHtml;
